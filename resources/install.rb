@@ -8,22 +8,24 @@ default_action :install
 property :version, String, default: '6.5.4'
 property :apt_repo, String, default: 'https://artifacts.elastic.co/packages/6.x/apt'
 property :apt_repo_key, String, default: 'https://packages.elastic.co/GPG-KEY-elasticsearch'
+property :yum_repo, String, default: 'https://artifacts.elastic.co/packages/6.x/yum'
+property :yum_repo_key, String, default: 'https://packages.elastic.co/GPG-KEY-elasticsearch'
 
 action :install do
   case node['platform_family']
 
   when 'rhel'
     yum_repository 'beats' do
-      description 'elasticsearch beats'
-      baseurl 'https://artifacts.elastic.co/packages/6.x/yum'
-      gpgkey 'https://packages.elastic.co/GPG-KEY-elasticsearch'
+      description 'elasticsearch'
+      baseurl new_resource.yum_repo
+      gpgkey new_resource.yum_repo_key
       action :create
     end
 
   when 'debian'
     package 'apt-transport-https'
 
-    apt_repository 'beats' do
+    apt_repository 'elasticsearch' do
       uri new_resource.apt_repo
       distribution ''
       components %w[stable main]
@@ -32,18 +34,9 @@ action :install do
 
     apt_update 'beats'
 
-  end 
-
-  if new_resource.filebeat
-    package 'filebeat'
   end
 
-  if new_resource.metricbeat
-    package 'metricbeat'
-  end
-
-  if new_resource.packetbeat
-    package 'packetbeat'
-  end
-
+  package 'filebeat' if new_resource.filebeat
+  package 'metricbeat' if new_resource.metricbeat
+  package 'packetbeat' if new_resource.packetbeat
 end
