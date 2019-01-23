@@ -20,8 +20,8 @@ action_class do
     copy_properties_to(configure)
     install = beats_install(new_resource.name, &block)
     copy_properties_to(install)
-    configure
     install
+    configure
   end
 
   def svc_manager(&block)
