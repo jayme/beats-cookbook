@@ -26,6 +26,5 @@ default['beats']['packetbeat']['config']['packetbeat.protocols.mysql']['ports'] 
 # default['beats']['packetbeat']['config']['packetbeat.protocols.mongo']['send_request'] = false
 # default['beats']['packetbeat']['config']['packetbeat.protocols.mongo']['send_response'] = false
 
-hosts = default['beats']['config']['output.elasticsearch']['hosts']
-default['beats']['packetbeat']['config']['output.elasticsearch']['hosts'] = hosts
+default['beats']['packetbeat']['config']['output.elasticsearch']['hosts'] = ['beats.localdomain']
 default['beats']['packetbeat']['config']['output.elasticsearch']['template.overwrite'] = 'false'

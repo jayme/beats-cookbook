@@ -13,6 +13,5 @@ default['beats']['metricbeat']['config']['metricbeat.modules'] = [
   },
 ]
 
-hosts = default['beats']['config']['output.elasticsearch']['hosts']
-default['beats']['metricbeat']['config']['output.elasticsearch']['hosts'] = hosts
+default['beats']['metricbeat']['config']['output.elasticsearch']['hosts'] = ['beats.localdomain']
 default['beats']['metricbeat']['config']['output.elasticsearch']['template.overwrite'] = 'false'
