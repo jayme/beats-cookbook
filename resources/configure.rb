@@ -14,7 +14,6 @@ property :packetbeat_config, Hash, default: lazy { node['beats']['packetbeat']['
 
 action :configure do
   require 'yaml'
-
   if new_resource.filebeat
     template new_resource.filebeat_config_file.to_s do
       mode   0o644
@@ -41,5 +40,4 @@ action :configure do
       source 'beats.yml.erb'
     end
   end
-
 end
