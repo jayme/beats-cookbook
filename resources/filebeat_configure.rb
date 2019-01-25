@@ -9,7 +9,7 @@ property :filebeat_config_file, String, default: lazy { node['beats']['filebeat'
 property :filebeat_config, Hash, default: lazy { node['beats']['filebeat']['config'] }
 property :filebeat_module, String, default: 'default'
 property :filebeat_modules_path, String, default: lazy { node['beats']['filebeat']['modules']['path'] }
-property :filebeat_modules_config, Hash, default: lazy { node['beats']['filebeat']['modules']["#{filebeat_module}"]['config'] }
+property :filebeat_modules_config, Array, default: lazy { node['beats']['filebeat']['modules']["#{filebeat_module}"]['config'] }
 
 action :configure do
   require 'yaml'

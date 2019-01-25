@@ -24,5 +24,6 @@ default['beats']['filebeat']['modules']['default']['config'] = [
   },
 ]
 
+
 default['beats']['filebeat']['config']['output.elasticsearch']['hosts'] = ['beats.localdomain']
 default['beats']['filebeat']['config']['output.elasticsearch']['template.overwrite'] = 'false'
