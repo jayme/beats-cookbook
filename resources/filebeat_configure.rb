@@ -7,8 +7,9 @@ default_action :configure
 
 property :filebeat_config_file, String, default: lazy { node['beats']['filebeat']['conf_file'] }
 property :filebeat_config, Hash, default: lazy { node['beats']['filebeat']['config'] }
+property :filebeat_module, String, default: 'default'
 property :filebeat_modules_path, String, default: lazy { node['beats']['filebeat']['modules']['path'] }
-property :filebeat_modules_config, Hash, default: lazy { node['beats']['filebeat']['modules']['default']['config'] }
+property :filebeat_modules_config, Hash, default: lazy { node['beats']['filebeat']['modules']["#{filebeat_module}"]['config'] }
 
 action :configure do
   require 'yaml'
@@ -18,11 +19,11 @@ action :configure do
     variables content: JSON.parse(new_resource.filebeat_config.to_json).to_yaml
     source 'beats.yml.erb'
   end
-  template 'default.yml' do
+  template "#{new_resource.filebeat_module}" do
     mode   0o644
     cookbook 'beats'
     variables content: JSON.parse(new_resource.filebeat_modules_config.to_json).to_yaml
     source 'beats.yml.erb'
-    path new_resource.filebeat_modules_path.to_s
+    path "#{new_resource.filebeat_modules_path}/#{new_resource.filebeat_module}.yml"
   end
 end
