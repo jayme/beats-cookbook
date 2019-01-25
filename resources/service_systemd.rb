@@ -9,7 +9,7 @@ end
 default_action :start
 
 action :start do
-  service 'filebeat' do
+  service "#{new_resource.beat}" do
     provider Chef::Provider::Service::Systemd
     supports status: true
     action [:start]
@@ -17,7 +17,7 @@ action :start do
 end
 
 action :stop do
-  service 'filebeat' do
+  service "#{new_resource.beat}" do
     provider Chef::Provider::Service::Systemd
     supports status: true
     action [:stop]

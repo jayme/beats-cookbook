@@ -8,11 +8,9 @@ module Beats
     def self.included(base)
       base.class_eval do
         property :instance, String, name_property: true
-        property :username, String, default: 'beats'
-        property :groupname, String, default: 'beats'
-        property :filebeat, [true, false], default: true
-        property :metricbeat, [true, false], default: true
-        property :packetbeat, [true, false], default: true
+        property :beats_user, String, default: 'beats'
+        property :beats_group, String, default: 'beats'
+        property :beat, String, default: 'filebeat'
       end
     end
   end

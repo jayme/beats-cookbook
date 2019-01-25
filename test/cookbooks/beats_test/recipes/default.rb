@@ -5,4 +5,6 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 #
 
-beats 'default'
+filebeat 'default'
+metricbeat 'default'
+packetbeat 'default'
