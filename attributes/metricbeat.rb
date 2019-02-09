@@ -4,7 +4,7 @@ default['beats']['metricbeat']['conf_file'] = ::File.join(node['beats']['metricb
 
 default['beats']['metricbeat']['config']['name'] = node['fqdn']
 
-default['beats']['metricbeat']['config']['metricbeat.config.modules']['path'] = '${path.config}/conf.d/*.yml'
+default['beats']['metricbeat']['config']['metricbeat.config.modules']['path'] = '${path.config}/modules.d/*.yml'
 default['beats']['metricbeat']['config']['metricbeat.config.modules']['reload.enabled'] = 'false'
 
 default['beats']['metricbeat']['config']['output.elasticsearch']['hosts'] = ['beats.localdomain']
