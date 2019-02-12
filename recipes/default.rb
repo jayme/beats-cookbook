@@ -2,7 +2,7 @@
 # Cookbook:: beats
 # Recipe:: default
 #
-# Copyright:: 2019,  jp@supplntr.io
+# Copyright:: 2019,  jp@noemail
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

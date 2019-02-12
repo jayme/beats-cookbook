@@ -18,9 +18,9 @@ end
 
 action_class do
   def init(&block)
-    install = metricbeat_install(new_resource.name, &block)
+    install = beats_install(new_resource.name, &block)
     copy_properties_to(install)
-    configure = metricbeat_configure(new_resource.name, &block)
+    configure = configure(new_resource.name, &block)
     copy_properties_to(configure)
     install
     configure

@@ -1,8 +1,6 @@
-include Beats::Helpers
-
 resource_name :service_manager_upstart
 
-provides :service, platform_family: 'debian' do |_node|
+provides :service_manager, platform_family: 'debian' do |_node|
   Chef::Platform::ServiceHelpers.service_resource_providers.include?(:upstart) &&
     !Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end
@@ -10,6 +8,16 @@ end
 default_action :start
 
 action :start do
+  template new_resource.beat do
+    source 'upstart.conf.erb'
+    cookbook 'beats'
+    owner 'root'
+    group 'root'
+    mode '0755'
+    path "/etc/init/#{new_resource.beat}.conf"
+    variables(service: new_resource.beat)
+  end
+
   service 'filebeat' do
     provider Chef::Provider::Service::Upstart
     supports status: true

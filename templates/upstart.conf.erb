@@ -1,0 +1,8 @@
+description     "<%= @service %>"
+start on runlevel [2345]
+stop on runlevel [!2345]
+ 
+respawn
+respawn limit 2 60
+ 
+exec "/usr/share/<%= @service %>/bin/<%= @service %> -c /etc/<%= @service %>/<%= @service %>.yml -path.home /usr/share/<%= @service %> -path.config /etc/<%= @service %> -path.data /var/lib/<%= @service %> -path.logs /var/log/<%= @service %>"

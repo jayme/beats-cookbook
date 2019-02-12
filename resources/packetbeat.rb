@@ -18,9 +18,9 @@ end
 
 action_class do
   def init(&block)
-    install = packetbeat_install(new_resource.name, &block)
+    install = beats_install(new_resource.name, &block)
     copy_properties_to(install)
-    configure = packetbeat_configure(new_resource.name, &block)
+    configure = configure(new_resource.name, &block)
     copy_properties_to(configure)
     install
     configure
@@ -33,7 +33,7 @@ action_class do
         package_name 'chef-provider-service-daemontools'
         action :install
       end
-      svc = service_daemontools(new_resource.name, &block)
+      svc = service_daemontools(new_resource.beat, &block)
     when 'debian', 'rhel'
       svc = service_manager(new_resource.beat, &block)
     end

@@ -1,8 +1,5 @@
-# To learn more about Custom Resources, see https://docs.chef.io/custom_resources.html
-include Beats::Helpers
-
-resource_name :filebeat_install
-provides :filebeat_install
+resource_name :beats_install
+provides :beats_install
 default_action :install
 
 property :version, String, default: '6.5.4'
@@ -36,5 +33,5 @@ action :install do
 
   end
 
-  package 'filebeat'
+  package new_resource.beat.to_s
 end
