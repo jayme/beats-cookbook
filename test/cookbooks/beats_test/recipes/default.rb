@@ -8,3 +8,5 @@
 filebeat 'default'
 metricbeat 'default'
 packetbeat 'default'
+
+beat_module 'default'
