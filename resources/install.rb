@@ -19,6 +19,8 @@ action :install do
       action :create
     end
 
+    package new_resource.beat.to_s
+
   when 'debian'
     package 'apt-transport-https'
 
@@ -31,7 +33,20 @@ action :install do
 
     apt_update 'beats'
 
+    package new_resource.beat.to_s
+
+  when 'freebsd'
+    portsnap_bin = 'portsnap'
+    portsnap_options = '--interactive'
+    # run at compile time
+    unless ::File.exist?('/usr/ports/.portsnap.INDEX')
+      e = execute "#{portsnap_bin} fetch extract #{portsnap_options}".strip do
+        action(:run)
+      end
+    end
+
+    package 'beats'
+
   end
 
-  package new_resource.beat.to_s
 end

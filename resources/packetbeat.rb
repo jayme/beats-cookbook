@@ -27,16 +27,7 @@ action_class do
   end
 
   def svc_manager(&block)
-    case node['platform_family']
-    when 'freebsd'
-      chef_gem 'chef-gems' do
-        package_name 'chef-provider-service-daemontools'
-        action :install
-      end
-      svc = service_daemontools(new_resource.beat, &block)
-    when 'debian', 'rhel'
-      svc = service_manager(new_resource.beat, &block)
-    end
+    svc = service_manager(new_resource.beat, &block)
     copy_properties_to(svc)
     svc
   end

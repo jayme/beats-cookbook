@@ -2,16 +2,24 @@ resource_name :beat_module
 provides :beat_module
 default_action :configure
 
+base_config = '/etc'
+case node['platform']
+when 'freebsd'
+  base_config = '/usr/local/etc/beats'
+end
 property :beat, String, default: 'filebeat'
 property :beat_module, String, default: 'default'
 property :beat_module_config, Array, default: lazy { node['beats']["#{beat}"]['modules']["#{beat_module}"]['config'] }
 property :beat_path, String, default: lazy { "/usr/share/#{beat}" }
-property :beat_config_path, String, default: lazy { "/etc/#{beat}" }
+property :beat_config_path, String, default: lazy { "#{base_config}/#{beat}" }
 property :beat_data_path, String, default: lazy { "/var/lib/#{beat}" }
 property :beat_log_path, String, default: lazy { "/var/log/#{beat}" }
 
 action :configure do
   require 'yaml'
+  
+  directory "#{beat_config_path}/modules.d/"
+
   template "#{new_resource.beat_module}" do	
     mode   0o644	
     cookbook 'beats'	
