@@ -1,8 +1,5 @@
 resource_name :service_manager_freebsd
 
-#provides :service_manager, os: 'freebsd' do |_node|
-#  Chef::Platform::ServiceHelpers.service_resource_providers.include?(:freebsd)
-#end
 provides :service_manager, os: 'freebsd'
 
 default_action :start
