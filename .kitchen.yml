@@ -1,41 +1,24 @@
 ---
 driver:
-  name: dokken
-  chef_version: <%= ENV['KITCHEN_CHEF_VER'] || 12 %>
-
-transport:
-  name: dokken
+  name: vagrant
+  provider: parallels
+  server_name_prefix: "chef_beats"
 
 provisioner:
-  name: dokken
-  always_update_cookbooks: true
+  name: chef_zero
+  product_version: <%= ENV['KITCHEN_CHEF_VER'] || 14 %>
 
 platforms:
   - name: ubuntu-16.04
-    driver:
-      image: dokken/ubuntu-16.04
-      pid_one_command: /bin/systemd
-      privileged: true
-      volumes:
-        - /sys/fs/cgroup:/sys/fs/cgroup
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
   - name: ubuntu-14.04
-    driver:
-      image: dokken/ubuntu-14.04
-      pid_one_command: /sbin/init
-  - name: centos-6
-    driver:
-      image: dokken/centos-6
-      pid_one_command: /sbin/init
+  - name: freebsd-11
   - name: centos-7
-    driver:
-      image: dokken/centos-7
-      privileged: true
-      pid_one_command: /usr/lib/systemd/systemd
+  - name: debian-9
+
 verifier:
   name: inspec
   reporter: junit
+
 suites:
   - name: default-beats
     run_list:
