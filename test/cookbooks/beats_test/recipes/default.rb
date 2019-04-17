@@ -5,8 +5,13 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 #
 
-filebeat 'default'
-metricbeat 'default'
-packetbeat 'default'
+if %w(debian ubuntu).include?(node['platform'])
+  filebeat 'default'
+  metricbeat 'default'
+  packetbeat 'default'
+else
+  filebeat 'default'
+  metricbeat 'default'
+end
 
 beat_module 'default'
