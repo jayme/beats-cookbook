@@ -4,10 +4,10 @@ maintainer_email 'jp@noemail'
 license 'GPL-3.0'
 description 'Installs/Configures beats'
 long_description 'Installs/Configures beats'
-version '1.1.0'
+version '1.1.1'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 
-%w[ubuntu centos].each do |os|
+%w[ubuntu centos freebsd].each do |os|
   supports os
 end
 
