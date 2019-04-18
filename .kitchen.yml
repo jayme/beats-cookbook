@@ -6,7 +6,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  product_version: <%= ENV['KITCHEN_CHEF_VER'] || 14 %>
+  product_version: <%= ENV['KITCHEN_CHEF_VER'] || 12 %>
 
 platforms:
   - name: ubuntu-16.04
