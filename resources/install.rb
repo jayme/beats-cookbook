@@ -41,12 +41,11 @@ action :install do
     # run at compile time
     unless ::File.exist?('/usr/ports/.portsnap.INDEX')
       e = execute "#{portsnap_bin} fetch extract #{portsnap_options}".strip do
-        action(:run)
+          action(:run)
       end
     end
 
     package 'beats'
 
   end
-
 end

@@ -21,7 +21,7 @@ action :start do
   service 'filebeat' do
     provider Chef::Provider::Service::Upstart
     supports status: true
-    action [:enable, :start]
+    action %i[enable start]
   end
 end
 

@@ -5,7 +5,7 @@ provides :service_manager, os: 'freebsd'
 default_action :start
 
 action :start do
-  service "#{new_resource.beat}" do
+  service new_resource.beat.to_s do
     provider Chef::Provider::Service::Init::Freebsd
     supports status: true
     action [:start]
@@ -13,7 +13,7 @@ action :start do
 end
 
 action :stop do
-  service "#{new_resource.beat}" do
+  service new_resource.beat.to_s do
     provider Chef::Provider::Service::Init::Freebsd
     supports status: true
     action [:stop]
