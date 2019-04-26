@@ -1,6 +1,6 @@
-resource_name :service_manager_systemd
+resource_name :beats_service_manager_systemd
 
-provides :service_manager, os: 'linux' do |_node|
+provides :beats_service_manager, os: 'linux' do |_node|
   Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end
 

@@ -1,6 +1,6 @@
-resource_name :service_manager_freebsd
+resource_name :beats_service_manager_freebsd
 
-provides :service_manager, os: 'freebsd'
+provides :beats_service_manager, os: 'freebsd'
 
 default_action :start
 

@@ -1,6 +1,6 @@
-resource_name :service_manager_upstart
+resource_name :beats_service_manager_upstart
 
-provides :service_manager, platform_family: 'debian' do |_node|
+provides :beats_service_manager, platform_family: 'debian' do |_node|
   Chef::Platform::ServiceHelpers.service_resource_providers.include?(:upstart) &&
     !Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end

@@ -27,7 +27,7 @@ action_class do
   end
 
   def svc_manager(&block)
-    svc = service_manager(new_resource.beat, &block)
+    svc = beats_service_manager(new_resource.beat, &block)
     copy_properties_to(svc)
     svc
   end
