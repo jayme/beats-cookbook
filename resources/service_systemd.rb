@@ -25,4 +25,5 @@ end
 action :restart do
   action_stop
   action_start
+  subscribes :reload, "template[#{new_resource.beat_config_path}/#{new_resource.beat}.yml]", :immediately
 end
